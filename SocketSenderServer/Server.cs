@@ -20,7 +20,7 @@ namespace SocketSenderServer
 		public void openSocket(int port)
 		{
 			receiver = new UdpClient(port);
-			receiver.BeginReceive(DataReceived, receiver);
+			receiver.BeginReceive(new AsyncCallback(DataReceived), null);
 
 			progress_hmi.Report(true);
 		}
@@ -37,16 +37,15 @@ namespace SocketSenderServer
 		{
 			try
 			{
-				UdpClient c = (UdpClient)ar.AsyncState;
 				IPEndPoint receivedIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
-				Byte[] receivedBytes = c.EndReceive(ar, ref receivedIpEndPoint);
+				Byte[] receivedBytes = receiver.EndReceive(ar, ref receivedIpEndPoint);
 
 				// Convert data to ASCII and print in console
 				string receivedText = BitConverter.ToString(receivedBytes).Replace("-", string.Empty);
 				progress_str.Report(receivedIpEndPoint + ": " + receivedText + Environment.NewLine);
 
 				// Restart listening for udp data packages
-				c.BeginReceive(DataReceived, ar.AsyncState);
+				receiver.BeginReceive(new AsyncCallback(DataReceived), null);
 			}
 			catch (ObjectDisposedException)
 			{
