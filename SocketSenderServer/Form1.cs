@@ -36,7 +36,10 @@ namespace SocketSenderServer
 				}
 				CloseSocketButton.Enabled = status;
 
-				server.closeSocket();
+				if (!status)
+				{
+					server.closeSocket();
+				}
 			});
 
 			ServerIpBox.Text = GetIP();
