@@ -46,7 +46,7 @@ namespace SocketSenderServer
 				MsgBox.Enabled = status;
 				MessageList.Enabled = status;
 
-				server.closeServer();
+				server.closeSocket();
 			});
 
 			ServerIpBox.Text = GetIP();
@@ -92,7 +92,7 @@ namespace SocketSenderServer
 				return;
 			}
 
-			server.openServer(System.Convert.ToInt32(PortNoBox.Text));
+			server.openSocket(System.Convert.ToInt32(PortNoBox.Text));
 		}
 
 		private IPAddress parseIpAddr()
