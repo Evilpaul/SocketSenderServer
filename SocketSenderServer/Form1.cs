@@ -35,24 +35,12 @@ namespace SocketSenderServer
 					OpenSocketButton.Enabled = !status;
 				}
 				CloseSocketButton.Enabled = status;
-				if (status)
-				{
-					UpdateSendBtnStatus();
-				}
-				else
-				{
-					SendMsgButton.Enabled = status;
-				}
-				MsgBox.Enabled = status;
-				MessageList.Enabled = status;
 
 				server.closeSocket();
 			});
 
 			ServerIpBox.Text = GetIP();
 			PortNoBox.Text = "5050";
-
-			toolTip1.SetToolTip(MsgBox, "Hex input (e.g. DEADBEEF01)");
 
 			progress_hmi.Report(false);
 
@@ -143,30 +131,10 @@ namespace SocketSenderServer
 			}
 		}
 
-		private void UpdateSendBtnStatus()
-		{
-			if(String.IsNullOrEmpty(MsgBox.Text))
-			{
-				SendMsgButton.Enabled = false;
-			}
-			else
-			{
-				SendMsgButton.Enabled = true;
-			}
-		}
-
 		private void CloseSocketButton_Click(object sender, EventArgs e)
 		{
 			progress_str.Report("Closing Socket..."); 
-			
 			progress_hmi.Report(false);
-		}
-
-		private void SendMsgButton_Click(object sender, EventArgs e)
-		{
-			progress_str.Report("Sending Msg...");
-
-			server.sendMessage(MsgBox.Text);
 		}
 
 		private void PortNoBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -177,40 +145,15 @@ namespace SocketSenderServer
 			}
 		}
 
-		private void MsgBox_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			if (!Regex.IsMatch(e.KeyChar.ToString(), "^[0-9a-fA-F\b]+$"))
-			{
-				e.Handled = true;
-			}
-		}
-
-		private void MessageList_ItemActivate(object sender, EventArgs e)
-		{
-			MsgBox.Text = MessageList.SelectedItems[0].SubItems[1].Text;
-		}
-
-		private void MsgBox_TextChanged(object sender, EventArgs e)
-		{
-			UpdateSendBtnStatus();
-		}
-
-		private void ServerIpBox_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			if (!Regex.IsMatch(e.KeyChar.ToString(), "^[0-9.\b]+$"))
-			{
-				e.Handled = true;
-			}
-		}
-
-		private void ServerIpBox_TextChanged(object sender, EventArgs e)
-		{
-			UpdateOpenBtnStatus();
-		}
-
 		private void PortNoBox_TextChanged(object sender, EventArgs e)
 		{
 			UpdateOpenBtnStatus();
+		}
+
+		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			progress_str.Report("Closing Socket...");
+			progress_hmi.Report(false);
 		}
 	}
 }

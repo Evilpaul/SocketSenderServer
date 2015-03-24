@@ -29,12 +29,6 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
-            "NightMode: Off",
-            "100600"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
-            "NightMode: On",
-            "100601"}, -1);
 			this.OpenSocketButton = new System.Windows.Forms.Button();
 			this.CloseSocketButton = new System.Windows.Forms.Button();
 			this.ServerIpBox = new System.Windows.Forms.TextBox();
@@ -43,12 +37,6 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.OutputLog = new System.Windows.Forms.ListBox();
-			this.SendMsgButton = new System.Windows.Forms.Button();
-			this.MsgBox = new System.Windows.Forms.TextBox();
-			this.MessageList = new System.Windows.Forms.ListView();
-			this.Description = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.Data = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this.SuspendLayout();
 			// 
 			// OpenSocketButton
@@ -79,8 +67,6 @@
 			this.ServerIpBox.Name = "ServerIpBox";
 			this.ServerIpBox.Size = new System.Drawing.Size(100, 20);
 			this.ServerIpBox.TabIndex = 2;
-			this.ServerIpBox.TextChanged += new System.EventHandler(this.ServerIpBox_TextChanged);
-			this.ServerIpBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ServerIpBox_KeyPress);
 			// 
 			// contextMenuStrip1
 			// 
@@ -124,72 +110,11 @@
 			this.OutputLog.Size = new System.Drawing.Size(319, 212);
 			this.OutputLog.TabIndex = 6;
 			// 
-			// SendMsgButton
-			// 
-			this.SendMsgButton.Enabled = false;
-			this.SendMsgButton.Location = new System.Drawing.Point(12, 276);
-			this.SendMsgButton.Name = "SendMsgButton";
-			this.SendMsgButton.Size = new System.Drawing.Size(60, 23);
-			this.SendMsgButton.TabIndex = 7;
-			this.SendMsgButton.Text = "Send";
-			this.SendMsgButton.UseVisualStyleBackColor = true;
-			this.SendMsgButton.Click += new System.EventHandler(this.SendMsgButton_Click);
-			// 
-			// MsgBox
-			// 
-			this.MsgBox.ContextMenuStrip = this.contextMenuStrip1;
-			this.MsgBox.Enabled = false;
-			this.MsgBox.Location = new System.Drawing.Point(78, 278);
-			this.MsgBox.Name = "MsgBox";
-			this.MsgBox.Size = new System.Drawing.Size(253, 20);
-			this.MsgBox.TabIndex = 8;
-			this.MsgBox.TextChanged += new System.EventHandler(this.MsgBox_TextChanged);
-			this.MsgBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MsgBox_KeyPress);
-			// 
-			// MessageList
-			// 
-			this.MessageList.Activation = System.Windows.Forms.ItemActivation.TwoClick;
-			this.MessageList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Description,
-            this.Data});
-			this.MessageList.Enabled = false;
-			this.MessageList.FullRowSelect = true;
-			this.MessageList.GridLines = true;
-			this.MessageList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-			listViewItem3.Tag = "";
-			listViewItem4.Tag = "";
-			this.MessageList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
-			this.MessageList.Location = new System.Drawing.Point(337, 6);
-			this.MessageList.MultiSelect = false;
-			this.MessageList.Name = "MessageList";
-			this.MessageList.ShowGroups = false;
-			this.MessageList.Size = new System.Drawing.Size(213, 292);
-			this.MessageList.Sorting = System.Windows.Forms.SortOrder.Ascending;
-			this.MessageList.TabIndex = 9;
-			this.MessageList.UseCompatibleStateImageBehavior = false;
-			this.MessageList.View = System.Windows.Forms.View.Details;
-			this.MessageList.ItemActivate += new System.EventHandler(this.MessageList_ItemActivate);
-			// 
-			// Description
-			// 
-			this.Description.Text = "Description";
-			this.Description.Width = 82;
-			// 
-			// Data
-			// 
-			this.Data.Text = "Data";
-			this.Data.Width = 127;
-			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(564, 314);
-			this.Controls.Add(this.MessageList);
-			this.Controls.Add(this.MsgBox);
-			this.Controls.Add(this.SendMsgButton);
+			this.ClientSize = new System.Drawing.Size(344, 280);
 			this.Controls.Add(this.OutputLog);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
@@ -201,6 +126,7 @@
 			this.MaximizeBox = false;
 			this.Name = "Form1";
 			this.Text = "Socket Sender - Server";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -215,13 +141,7 @@
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.ListBox OutputLog;
-		private System.Windows.Forms.Button SendMsgButton;
-		private System.Windows.Forms.TextBox MsgBox;
-		private System.Windows.Forms.ListView MessageList;
-		private System.Windows.Forms.ToolTip toolTip1;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-		private System.Windows.Forms.ColumnHeader Description;
-		private System.Windows.Forms.ColumnHeader Data;
 	}
 }
 
